@@ -10,7 +10,7 @@ interface CardProps {
 const Card = ({ index }: CardProps) => {
   return (
     <Link
-      href={"/detailProperty"}
+      href={`/detailProperty/${ID}`}
       className="w-full shadow-2xl rounded-lg overflow-hidden text-start"
     >
       <Image

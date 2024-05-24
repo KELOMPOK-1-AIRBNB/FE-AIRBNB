@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import avatarSample from "@/assets/images/avatar.png";
 import ButtonPrimary from "@/components/elements/ButtonPrimary";
@@ -9,29 +9,43 @@ import Box from "./Box";
 import FormCheckIn from "./FormCheckIn";
 import HeaderDetail from "./HeaderDetail";
 import DividingLine from "./DividingLine";
+import axios from "axios";
+import { HomeStaysData } from "@/app/home/interface";
 
-const DetailProperty = () => {
+interface MovieDetailProps {
+  params: {
+    ID: string;
+  };
+}
+
+const DetailProperty = ({ params }: MovieDetailProps) => {
+  const { ID } = params;
+  const [data, setData] = useState<HomeStaysData[]>([]);
+  useEffect(() => {
+    const getHomeStayById = async () => {
+      try {
+        const response = await axios.get(`https://auf.my.id/homestays/${ID}`);
+        setData(response.data.data);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getHomeStayById();
+  }, []);
+
+  console.log(data);
   return (
     <section className="w-full mt-[80px] py-8 px-2 relative">
       <div className="container mx-auto h-full relative ">
-        <HeaderDetail />
+        <HeaderDetail items={data} />
         <div className="w-full h-full relative">
           <Box className="flex items-start justify-start gap-x-4 py-6 text-start lg:col-start-1 lg:h-fit">
             <div className="flex items-start justify-center flex-col">
               <h1 className="text-lg lg:text-2xl font-extrabold">
-                Entire Rental Unit By Hosted KopalMuhamad
+                {data.HomestayName}
               </h1>
-              <p className="text-base font-medium">
-                10 Guests, 4 Bedrooms,4 Bathroom
-              </p>
             </div>
-            <Image
-              src={avatarSample}
-              alt="Rounded avatar"
-              width={30}
-              height={30}
-              className="w-16 h-16 p-[2px] rounded-full ring-2 mb-auto ring-gray-300 dark:ring-gray-500"
-            />
           </Box>
 
           <DividingLine />
@@ -49,11 +63,7 @@ const DetailProperty = () => {
 
           <Box className="col-start-1">
             <h1 className="text-xl font-bold">The Space</h1>
-            <p>Bed Type : Queen</p>
-            <p>Propery Type : Bungalow</p>
-            <p>Bed Room : 4</p>
-            <p>Bath Room : 4</p>
-            <p>Beds : 3</p>
+            <p>{data.Description}</p>
           </Box>
 
           <DividingLine />
