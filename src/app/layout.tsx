@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-const inter = Quicksand({ subsets: ["latin"], display: 'swap', adjustFontFallback: false});
+const inter = Quicksand({ subsets: ["latin"], display: "swap", adjustFontFallback: false });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +21,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );
