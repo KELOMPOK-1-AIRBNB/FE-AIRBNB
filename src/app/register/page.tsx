@@ -40,7 +40,7 @@ const Register = () => {
         <img className="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/301692/login.svg" alt="Workflow" />
         <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">Create a new account</h2>
         <p className="mt-2 text-center text-sm leading-5 text-gray-500 max-w">
-          Or
+          Or{" "}
           <a href="/" className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
             login to your account
           </a>
